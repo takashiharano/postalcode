@@ -1,7 +1,7 @@
 # Copyright 2022 Takashi Harano
 # Released under the MIT license
 # Create: 20221020
-# Update: 20250118
+# Update: 20250119
 
 import os
 import sys
@@ -235,18 +235,24 @@ def normalize_office_name(name):
     return name
 
 #----------------------------------------------------------
-def main():
+def webmain():
     code5 = util.get_request_param('code5', '');
     code7 = util.get_request_param('code7', '');
     addr = util.get_request_param('addr', '');
 
-    if code5 != '':
-        data = from_code5(code5)
-    elif code7 != '':
+    data = main(code5, code7, addr)
+
+    util.send_response(data, 'application/json');
+
+#----------------------------------------------------------
+def main(code7, addr='', code5=''):
+    if code7 != '':
         data = from_code7(code7)
     elif addr != '':
         data = from_addr(addr)
+    elif code5 != '':
+        data = from_code5(code5)
     else:
         data = None
 
-    util.send_response(data, 'application/json');
+    return data
