@@ -191,7 +191,6 @@ def csv_to_dict_jigyosyo(record):
     }
     return data
 
-
 #----------------------------------------------------------
 def convert_result_dict(src_dict):
     data = {
@@ -236,11 +235,11 @@ def normalize_office_name(name):
 
 #----------------------------------------------------------
 def webmain():
-    code5 = util.get_request_param('code5', '');
     code7 = util.get_request_param('code7', '');
     addr = util.get_request_param('addr', '');
+    code5 = util.get_request_param('code5', '');
 
-    data = main(code5, code7, addr)
+    data = main(code7, addr, code5)
 
     util.send_response(data, 'application/json');
 
